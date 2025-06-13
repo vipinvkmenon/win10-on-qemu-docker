@@ -7,6 +7,9 @@ on:
 
 env:
   IMAGE_NAME: win10-novnc
+  ZIP_FILE: MSEdge.Win10.VMware.zip
+  ZIP_URL: https://archive.org/download/msedge.win10.vmware.galoget/MSEdge.Win10.VMware.zip
+  ZIP_CACHE_KEY: vmware-zip-MSEdge.Win10.VMware.zip
 
 jobs:
   build-and-push:
@@ -19,15 +22,27 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        
+      - name: Restore ZIP from GitHub Actions Cache
+        id: cache-zip
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.ZIP_FILE }}
+          key: ${{ env.ZIP_CACHE_KEY }}
 
       - name: Install qemu-utils and unzip
         run: |
           sudo apt-get update
           sudo apt-get install -y qemu-utils unzip wget
-
-      - name: Download and unzip Windows 10 VM
+          
+      - name: Download ZIP if not cached
+        if: steps.cache-zip.outputs.cache-hit != 'true'
         run: |
-          wget -q https://archive.org/download/msedge.win10.vmware.galoget/MSEdge.Win10.VMware.zip
+          echo "Cache miss — downloading from archive.org"
+          wget -O $ZIP_FILE $ZIP_URL
+
+      - name:  Windows 10 VM
+        run: |
           unzip -q MSEdge.Win10.VMware.zip
           ls -l
           cp start.sh MSEdge-Win10-VMware/
