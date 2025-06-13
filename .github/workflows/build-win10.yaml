@@ -1,0 +1,56 @@
+name: Build Windows10 VM Image and Push to GHCR
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+env:
+  IMAGE_NAME: win10-novnc
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install qemu-utils and unzip
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-utils unzip wget
+
+      - name: Download and unzip Windows 10 VM
+        run: |
+          wget -q https://archive.org/download/msedge.win10.vmware.galoget/MSEdge.Win10.VMware.zip
+          unzip -q MSEdge.Win10.VMware.zip
+          ls -l
+
+      - name: Convert VMDK to QCOW2
+        run: |
+          qemu-img convert -f vmdk -O qcow2 "MSEdge - Win10-disk001.vmdk" win10.qcow2
+          ls -lh win10.qcow2
+
+      - name: Move files into Docker context
+        run: |
+          mv win10.qcow2 ./win10.qcow2
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Docker image
+        run: |
+          docker build -t ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest .
+
+      - name: Push to GHCR
+        run: |
+          docker push ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
