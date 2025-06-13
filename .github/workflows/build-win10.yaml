@@ -40,6 +40,13 @@ jobs:
         run: |
           echo "Cache miss — downloading from archive.org"
           wget -O $ZIP_FILE $ZIP_URL
+          
+      - name: Save ZIP to Cache (if downloaded)
+        if: steps.cache-zip.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ env.ZIP_FILE }}
+          key: ${{ env.ZIP_CACHE_KEY }}
 
       - name:  Windows 10 VM
         run: |
