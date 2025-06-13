@@ -45,6 +45,11 @@ jobs:
         run: |
           unzip -q MSEdge.Win10.VMware.zip
           ls -l
+          echo  "------------------------------------------------------------"
+          echo "xxxxxxxxxxxxxxxxxxxxxxx"
+          echo "-------------------------------------------------------------"
+          echo " "
+          echo " "
           cp start.sh MSEdge-Win10-VMware/
           cp Dockerfile MSEdge-Win10-VMware/
           cd MSEdge-Win10-VMware
@@ -52,8 +57,8 @@ jobs:
 
       - name: Convert VMDK to QCOW2
         run: |
-          cf MSEdge-Win10-VMware
-          qemu-img convert -f vmdk -O qcow2 "MSEdge - Win10-disk001.vmdk" win10.qcow2
+          cd MSEdge-Win10-VMware
+          qemu-img convert -f vmdk -O qcow2 "MSEdge-Win10-VMware-disk1.vmdk" win10.qcow2
           ls -lh
 
       - name: Log in to GHCR
