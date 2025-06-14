@@ -51,6 +51,7 @@ jobs:
       - name:  Windows 10 VM
         run: |
           unzip -q MSEdge.Win10.VMware.zip
+          rm -rf MSEdge.Win10.VMware.zip
           ls -l
           echo  "------------------------------------------------------------"
           echo "xxxxxxxxxxxxxxxxxxxxxxx"
@@ -66,6 +67,7 @@ jobs:
         run: |
           cd MSEdge-Win10-VMware
           qemu-img convert -f vmdk -O qcow2 "MSEdge-Win10-VMware-disk1.vmdk" win10.qcow2
+          rm -rf MSEdge-Win10-VMware-disk1.vmdk
           ls -lh
 
       - name: Log in to GHCR
