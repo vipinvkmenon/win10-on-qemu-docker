@@ -53,7 +53,7 @@ jobs:
         run: |
           ls -lh
           pwd
-          qemu-img create -f qcow2 /vm/winlite.qcow2 6G
+          qemu-img create -f qcow2 winlite.qcow2 6G
           ls -lh
 
       - name: Log in to GHCR
