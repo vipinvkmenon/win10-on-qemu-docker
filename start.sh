@@ -4,7 +4,7 @@ set -e
 # Start QEMU VM with VNC output on :1 (5901)
 qemu-system-x86_64 \
   -m 4096 \
-  -cdrom win10.iso
+  -cdrom win7.iso
   -cpu qemu64 \
   -drive file=winlite.qcow2,format=qcow2 \
   -boot d \
