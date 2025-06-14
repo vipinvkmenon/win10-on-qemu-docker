@@ -5,7 +5,7 @@ set -e
 qemu-system-x86_64 \
   -m 4096 \
   -drive file=win7.qcow2,format=qcow2 \
-  -boot c \
+  -boot d \
   -net nic -net user \
   -vga std \
   -usb -device usb-tablet \
