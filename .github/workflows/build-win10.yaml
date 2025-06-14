@@ -8,7 +8,7 @@ on:
 env:
   IMAGE_NAME: win7-novnc
   #ZIP_FILE: MSEdge.Win10.VMware.zip
-  ZIP_FILE: win.vmdk
+  ZIP_FILE: win7.vmdk
   #ZIP_URL: https://archive.org/download/msedge.win10.vmware.galoget/MSEdge.Win10.VMware.zip
   ZIP_URL: https://archive.org/download/windows-7-super-lite-sp-1-x-64/Windows%207%20SuperLite%20SP1%20x64.rar/Windows%207%20SuperLite%20SP1%20x64%2FWindows%207%20SuperLite%20SP1%20x64.vmdk
   ZIP_CACHE_KEY: "win7.vmdk"
@@ -73,6 +73,8 @@ jobs:
       #     ls -lh
       - name: Convert VMDK to QCOW2
         run: |
+          ls -lh
+          pwd
           qemu-img convert -f vmdk -O qcow2 win7.vmdk win7.qcow2
           rm -rf win7.vmdk
           ls -lh
