@@ -6,12 +6,11 @@ on:
     branches: [main]
 
 env:
-  IMAGE_NAME: win7-novnc
+  IMAGE_NAME: win10-novnc
   #ZIP_FILE: MSEdge.Win10.VMware.zip
-  ZIP_FILE: win7.vmdk
-  #ZIP_URL: https://archive.org/download/msedge.win10.vmware.galoget/MSEdge.Win10.VMware.zip
-  ZIP_URL: https://archive.org/download/windows-7-super-lite-sp-1-x-64/Windows%207%20SuperLite%20SP1%20x64.rar/Windows%207%20SuperLite%20SP1%20x64%2FWindows%207%20SuperLite%20SP1%20x64.vmdk
-  ZIP_CACHE_KEY: "win7.vmdk"
+  ZIP_FILE: win10.iso
+  ZIP_URL: https://archive.org/download/tiny-10_202301/tiny10%2023h1%20x64.iso
+  ZIP_CACHE_KEY: win10.iso
 
 jobs:
   build-and-push:
@@ -49,34 +48,12 @@ jobs:
         with:
           path: ${{ env.ZIP_FILE }}
           key: ${{ env.ZIP_CACHE_KEY }}
-
-      # - name:  Windows 10 VM
-      #   run: |
-      #     unzip -q MSEdge.Win10.VMware.zip
-      #     rm -rf MSEdge.Win10.VMware.zip
-      #     ls -l
-      #     echo  "------------------------------------------------------------"
-      #     echo "xxxxxxxxxxxxxxxxxxxxxxx"
-      #     echo "-------------------------------------------------------------"
-      #     echo " "
-      #     echo " "
-      #     cp start.sh MSEdge-Win10-VMware/
-      #     cp Dockerfile MSEdge-Win10-VMware/
-      #     cd MSEdge-Win10-VMware
-      #     ls -l
-
-      # - name: Convert VMDK to QCOW2
-      #   run: |
-      #     cd MSEdge-Win10-VMware
-      #     qemu-img convert -f vmdk -O qcow2 "MSEdge-Win10-VMware-disk1.vmdk" win10.qcow2
-      #     rm -rf MSEdge-Win10-VMware-disk1.vmdk
-      #     ls -lh
+ 
       - name: Convert VMDK to QCOW2
         run: |
           ls -lh
           pwd
-          qemu-img convert -f vmdk -O qcow2 win7.vmdk win7.qcow2
-          rm -rf win7.vmdk
+          qemu-img create -f qcow2 /vm/winlite.qcow2 6G
           ls -lh
 
       - name: Log in to GHCR
