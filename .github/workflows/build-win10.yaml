@@ -1,4 +1,4 @@
-name: Build Windows10 VM Image and Push to GHCR
+name: Build Windows7 VM Image and Push to GHCR
 
 on:
   workflow_dispatch:
@@ -22,16 +22,6 @@ jobs:
       packages: write
 
     steps:
-      - name: Maximize build space
-        uses: easimon/maximize-build-space@master
-        with:
-          root-reserve-mb: 512
-          swap-size-mb: 1024
-          remove-dotnet: 'true'
-      - name: Build
-        run: |
-          echo "Free space:"
-          df -h
       - name: Checkout repository
         uses: actions/checkout@v4
         
@@ -83,7 +73,6 @@ jobs:
       #     ls -lh
       - name: Convert VMDK to QCOW2
         run: |
-          
           qemu-img convert -f vmdk -O qcow2 win7.vmdk win7.qcow2
           rm -rf win7.vmdk
           ls -lh
@@ -97,7 +86,6 @@ jobs:
 
       - name: Build Docker image
         run: |
-
           docker build -t ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest .
 
       - name: Push to GHCR
