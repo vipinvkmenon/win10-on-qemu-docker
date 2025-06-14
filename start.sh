@@ -5,6 +5,7 @@ set -e
 qemu-system-x86_64 \
   -m 4096 \
   -cdrom win10.iso
+  -cpu qemu64 \
   -drive file=winlite.qcow2,format=qcow2 \
   -boot d \
   -net nic -net user \
