@@ -40,7 +40,7 @@ jobs:
         if: steps.cache-zip.outputs.cache-hit != 'true'
         run: |
           echo "Cache miss — downloading from archive.org"
-          wget -O $ZIP_FILE $ZIP_URL
+          wget -q -O $ZIP_FILE $ZIP_URL
           
       - name: Save ZIP to Cache (if downloaded)
         if: steps.cache-zip.outputs.cache-hit != 'true'
@@ -65,8 +65,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:tiny10 .
+          docker build -t ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:tiny7 .
 
       - name: Push to GHCR
         run: |
-          docker push ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:tiny10
+          docker push ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:tiny7
