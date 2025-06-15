@@ -8,14 +8,16 @@ ENV DEBIAN_FRONTEND=noninteractive
 #     git \
 #     curl \
 #     bash 
-RUN apt-get update && apt-get install -y \
-    qemu-system-x86 \
-    novnc \
-    websockify \
+# Install necessary packages
+RUN apk add --no-cache \
+    qemu-system-x86_64 \
+    python3 \
+    py3-pip \
     git \
     curl \
-    python3 \
-    && apt-get clean
+    bash
+    # websockify \
+    # novnc
 
 # Working directory
 WORKDIR /vm
