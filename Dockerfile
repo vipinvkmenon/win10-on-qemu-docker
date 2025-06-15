@@ -7,7 +7,7 @@ RUN apk add --no-cache \
     qemu-system-x86_64 \
     git \
     curl \
-    bash \
+    bash 
 
 # Working directory
 WORKDIR /vm
