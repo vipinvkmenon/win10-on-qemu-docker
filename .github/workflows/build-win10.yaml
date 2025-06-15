@@ -1,4 +1,4 @@
-name: Build Windows7 VM Image and Push to GHCR
+name: Build Windows Server 2019 VM Image and Push to GHCR
 
 on:
   workflow_dispatch:
