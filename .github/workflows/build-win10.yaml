@@ -9,7 +9,7 @@ env:
   IMAGE_NAME: win10-novnc
   #ZIP_FILE: MSEdge.Win10.VMware.zip
   ZIP_FILE: win10.iso
-  ZIP_URL: https://archive.org/download/tiny-10_202301/tiny10%2023h1%20x64.iso
+  ZIP_URL: https://archive.org/download/tiny-10_202301/tiny10%20x86%20beta%202.iso
   ZIP_CACHE_KEY: win10.iso
 
 jobs:
