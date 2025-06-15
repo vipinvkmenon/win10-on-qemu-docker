@@ -1,22 +1,23 @@
-FROM ubuntu:22.04
+FROM alpine:3.20
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install necessary packages
-RUN apt-get update && apt-get install -y \
-    qemu-system-x86 \
-    novnc \
-    websockify \
+RUN apk add --no-cache \
+    qemu-system-x86_64 \
+    python3 \
+    py3-pip \
     git \
     curl \
-    python3 \
-    && apt-get clean
+    bash \
+    websockify \
+    novnc
 
 # Working directory
 WORKDIR /vm
 
 # Copy disk and startup script
-COPY win2019.qcow2 . 
+COPY win2019.qcow2 .
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
