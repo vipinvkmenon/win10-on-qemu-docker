@@ -13,7 +13,7 @@ qemu-system-x86_64 \
   -rtc base=localtime \
   -smp 2 \
   -vnc :1 \
-  -display vnc \
+  -display none \
   -daemonize
 
 # Start noVNC to expose VNC via WebSocket on port 6080
