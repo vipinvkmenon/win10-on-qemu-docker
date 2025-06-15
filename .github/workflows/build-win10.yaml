@@ -56,8 +56,7 @@ jobs:
           pwd
           qemu-img convert -f vpc -O qcow2 win2019.vhd win2019.qcow2
           rm -rf win2019.vhd
-          qemu-img resize win2019.qcow2 9G
-
+          qemu-img resize --shrink win2019.qcow2 9G
           ls -lh
 
       - name: Log in to GHCR
