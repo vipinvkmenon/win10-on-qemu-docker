@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 env:
-  IMAGE_NAME: win2019-novnc
+  IMAGE_NAME: win7-novnc
   #ZIP_FILE: MSEdge.Win10.VMware.zip
   ZIP_FILE: win2019.vhd
   #ZIP_URL: https://archive.org/download/msedge.win10.vmware.galoget/MSEdge.Win10.VMware.zip
