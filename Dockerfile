@@ -5,13 +5,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install necessary packages
 RUN apk add --no-cache \
     qemu-system-x86_64 \
-    python3 \
-    py3-pip \
     git \
     curl \
     bash \
-    websockify \
-    novnc
 
 # Working directory
 WORKDIR /vm
