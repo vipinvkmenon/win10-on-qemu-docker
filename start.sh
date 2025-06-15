@@ -4,8 +4,8 @@ set -e
 # Start QEMU VM with VNC output on :1 (5901)
 qemu-system-x86_64 \
   -m 4096 \
-  -drive file=win7.qcow2,format=qcow2 \
-  -boot d \
+  -drive file=win2019.qcow2,format=qcow2 \
+  -boot c \
   -net nic -net user \
   -vga std \
   -usb -device usb-tablet \
