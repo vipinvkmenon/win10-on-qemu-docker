@@ -17,7 +17,7 @@ WORKDIR /vm
 
 # Copy disk and startup script
 COPY winlite.qcow2 .
-COPY win10.iso
+COPY win10.iso .
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
