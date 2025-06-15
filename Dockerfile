@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /vm
 
 # Copy disk and startup script
-COPY win10pe.qcow2 .
+COPY win10pe.iso .
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
