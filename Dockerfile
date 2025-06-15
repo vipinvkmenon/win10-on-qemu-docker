@@ -3,11 +3,19 @@ FROM alpine:3.20
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install necessary packages
-RUN apk add --no-cache \
-    qemu-system-x86_64 \
+# RUN apk add --no-cache \
+#     qemu-system-x86_64 \
+#     git \
+#     curl \
+#     bash 
+RUN apt-get update && apt-get install -y \
+    qemu-system-x86 \
+    novnc \
+    websockify \
     git \
     curl \
-    bash 
+    python3 \
+    && apt-get clean
 
 # Working directory
 WORKDIR /vm
