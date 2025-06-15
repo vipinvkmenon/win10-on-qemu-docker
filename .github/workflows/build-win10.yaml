@@ -54,8 +54,8 @@ jobs:
         run: |
           ls -lh
           pwd
-          qemu-img convert -O qcow2 win10pe.iso win10pe.qcow2
-          rm -rf win10pe.iso
+          # qemu-img convert -O qcow2 win10pe.iso win10pe.qcow2
+          # rm -rf win10pe.iso
           ls -lh
 
       - name: Log in to GHCR
@@ -67,8 +67,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:win10pe .
+          docker build -t ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:win10pe1 .
 
       - name: Push to GHCR
         run: |
-          docker push ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:win10pe
+          docker push ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:win10pe1
