@@ -4,7 +4,7 @@ set -e
 # Start QEMU VM with VNC output on :1 (5901)
 qemu-system-x86_64 \
   -m 4096 \
-  -drive file=win10pe.iso,format=iso \
+  -drive file=win10pe.iso,media=cdrom,format=raw \
   -boot c \
   -net nic -net user \
   -vga std \
